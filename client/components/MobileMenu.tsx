@@ -1,4 +1,4 @@
-import { Home, Hash, Bell, Mail, Bookmark, User, FileText, Shield } from "lucide-react";
+import { Home, Compass, Bell, Mail, Bookmark, User } from "lucide-react";
 import { X } from "lucide-react";
 
 interface MobileMenuProps {
@@ -6,206 +6,229 @@ interface MobileMenuProps {
   onClose: () => void;
 }
 
+const navItems = [
+  { icon: Home, label: "Home", href: "/", id: "home" },
+  { icon: Compass, label: "Explore", href: "/explore", id: "explore" },
+  {
+    icon: Bell,
+    label: "Notifications",
+    href: "/notifications",
+    id: "notifications",
+  },
+  { icon: Mail, label: "Messages", href: "/messages", id: "messages" },
+  { icon: Bookmark, label: "Bookmarks", href: "/bookmarks", id: "bookmarks" },
+  { icon: User, label: "Profile", href: "/profile", id: "profile" },
+];
+
+const subMenuItems = [
+  { icon: Home, label: "Home", href: "/", id: "submenu-home" },
+  { icon: Home, label: "Shop", href: "/shop", id: "submenu-shop" },
+  { icon: Home, label: "Mega menu", href: "/about", id: "submenu-about" },
+  { icon: Home, label: "Services", href: "/services", id: "submenu-services" },
+  { icon: Home, label: "Blog", href: "/blog", id: "submenu-blog" },
+  { icon: Home, label: "Contact us", href: "/contact", id: "submenu-contact" },
+];
+
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  if (!isOpen) return null;
-
-  const leftMenuItems = [
-    { icon: Home, label: "Home", href: "/" },
-    { icon: Bell, label: "Notifications", href: "/notifications" },
-    { icon: Bookmark, label: "Bookmarks", href: "/bookmarks" },
-    { icon: User, label: "Profile", href: "/profile" },
-  ];
-
-  const rightMenuItems = [
-    { icon: Hash, label: "Explore", href: "/explore" },
-    { icon: Mail, label: "Messages", href: "/messages" },
-    { icon: FileText, label: "Terms of Service", href: "/terms" },
-    { icon: Shield, label: "Privacy", href: "/privacy" },
-  ];
-
   return (
     <>
       {/* Backdrop */}
-      <div
-        onClick={onClose}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          zIndex: 999,
-        }}
-      />
+      {isOpen && (
+        <div
+          onClick={onClose}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 999,
+            transition: "opacity 0.3s ease-in-out",
+            opacity: isOpen ? 1 : 0,
+          }}
+        />
+      )}
 
-      {/* Menu Panel */}
+      {/* Sidebar Drawer */}
       <div
         style={{
           position: "fixed",
           top: 0,
           left: 0,
-          right: 0,
           bottom: 0,
+          width: "275px",
+          maxWidth: "80vw",
           backgroundColor: "#fff",
           zIndex: 1000,
           overflowY: "auto",
-          padding: "20px",
+          transform: isOpen ? "translateX(0)" : "translateX(-100%)",
+          transition: "transform 0.3s ease-in-out",
+          boxShadow: isOpen ? "2px 0 10px rgba(0, 0, 0, 0.1)" : "none",
         }}
       >
-        {/* Close Button */}
-        <button
-          onClick={onClose}
+        {/* Header with Logo and Close Button */}
+        <div
           style={{
-            position: "absolute",
-            top: "20px",
-            right: "20px",
-            background: "transparent",
-            border: "none",
-            cursor: "pointer",
-            padding: "8px",
+            padding: "16px",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-          }}
-          aria-label="Close menu"
-        >
-          <X size={24} color="#000" />
-        </button>
-
-        {/* Menu Content */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "20px 30px",
-            marginTop: "60px",
-            maxWidth: "400px",
-            margin: "60px auto 0",
-          }}
-        >
-          {/* Left Column */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-            {leftMenuItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={onClose}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    textDecoration: "none",
-                    color: "#000",
-                    fontSize: "16px",
-                    fontFamily: "Roboto, -apple-system, Helvetica, sans-serif",
-                    fontWeight: "100",
-                    lineHeight: "24px",
-                  }}
-                >
-                  <Icon size={21} strokeWidth={1.5} />
-                  <span>{item.label}</span>
-                </a>
-              );
-            })}
-            <a
-              href="/admin"
-              onClick={onClose}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                textDecoration: "none",
-                color: "#000",
-                fontSize: "16px",
-                fontFamily: "Roboto, -apple-system, Helvetica, sans-serif",
-                fontWeight: "100",
-                lineHeight: "24px",
-              }}
-            >
-              <span>Admin Panel*</span>
-            </a>
-          </div>
-
-          {/* Right Column */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-            {rightMenuItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={onClose}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    textDecoration: "none",
-                    color: "#000",
-                    fontSize: "16px",
-                    fontFamily: "Roboto, -apple-system, Helvetica, sans-serif",
-                    fontWeight: "100",
-                    lineHeight: "24px",
-                  }}
-                >
-                  <Icon size={21} strokeWidth={1.5} />
-                  <span>{item.label}</span>
-                </a>
-              );
-            })}
-            <a
-              href="/contact"
-              onClick={onClose}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                textDecoration: "none",
-                color: "#000",
-                fontSize: "16px",
-                fontFamily: "Roboto, -apple-system, Helvetica, sans-serif",
-                fontWeight: "100",
-                lineHeight: "24px",
-              }}
-            >
-              <span>Contact us</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Post Button */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "40px",
+            justifyContent: "space-between",
+            borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
           }}
         >
           <a
-            href="/post"
-            onClick={onClose}
+            href="/"
             style={{
-              display: "flex",
-              width: "182px",
-              height: "48px",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: "20px",
-              backgroundColor: "#1D9BF0",
+              display: "inline",
+              fontSize: "20px",
+              lineHeight: "30px",
               textDecoration: "none",
-              color: "#FFF",
-              textAlign: "center",
-              fontFamily: "Roboto, -apple-system, Helvetica, sans-serif",
-              fontSize: "16px",
-              fontWeight: "700",
-              lineHeight: "24px",
+              color: "rgb(15, 20, 25)",
             }}
           >
-            Post
+            <img
+              alt="Site logo"
+              loading="lazy"
+              src="https://67.vvveb.com/media/logo.png"
+              style={{
+                maxHeight: "60px",
+                verticalAlign: "middle",
+                display: "inline",
+              }}
+            />
           </a>
+          <button
+            onClick={onClose}
+            style={{
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              padding: "8px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            aria-label="Close menu"
+          >
+            <X size={24} color="#000" />
+          </button>
+        </div>
+
+        {/* Navigation */}
+        <div
+          style={{
+            padding: "16px",
+            width: "100%",
+          }}
+        >
+          <nav
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              width: "100%",
+              position: "relative",
+            }}
+          >
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  onClick={onClose}
+                  style={{
+                    width: "100%",
+                    marginBottom: "8px",
+                    padding: "12px 15px",
+                    borderRadius: "25px",
+                    cursor: "pointer",
+                    transition: "background-color 0.2s",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    textDecoration: "none",
+                    color: "rgb(15, 20, 25)",
+                    fontWeight: item.id === "home" ? "700" : "normal",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                  }}
+                >
+                  <Icon size={20} />
+                  <span>{item.label}</span>
+                </a>
+              );
+            })}
+
+            <div style={{ width: "100%", marginTop: "8px" }}>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                {subMenuItems.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <a
+                      key={item.id}
+                      href={item.href}
+                      onClick={onClose}
+                      style={{
+                        width: "100%",
+                        marginBottom: "8px",
+                        padding: "12px 15px",
+                        borderRadius: "25px",
+                        cursor: "pointer",
+                        transition: "background-color 0.2s",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "8px",
+                        textDecoration: "none",
+                        color: "rgb(15, 20, 25)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "rgba(0, 0, 0, 0.1)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "transparent";
+                      }}
+                    >
+                      <Icon size={20} />
+                      <span>{item.label}</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+
+            <a
+              href="/post"
+              onClick={onClose}
+              style={{
+                width: "75%",
+                marginTop: "16px",
+                padding: "12px 20px",
+                borderRadius: "20px",
+                backgroundColor: "rgb(77, 77, 209)",
+                color: "rgb(255, 255, 255)",
+                cursor: "pointer",
+                textDecoration: "none",
+                textAlign: "center",
+                fontWeight: "600",
+                fontSize: "16px",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "rgb(60, 60, 180)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "rgb(77, 77, 209)";
+              }}
+            >
+              Post
+            </a>
+          </nav>
         </div>
       </div>
     </>
