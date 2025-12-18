@@ -1,5 +1,5 @@
 import { Moon, Sun } from 'lucide-react';
-import { useMobile } from '@/hooks/use-mobile';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export default function Header() {
   const isMobile = useMobile();
