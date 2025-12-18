@@ -135,7 +135,7 @@ export default function Sidebar() {
               marginTop: "16px",
               padding: "12px 20px",
               borderRadius: "20px",
-              backgroundColor: "rgb(77, 77, 209)",
+              backgroundColor: "rgba(0, 119, 255, 1)",
               color: "rgb(255, 255, 255)",
               cursor: "pointer",
               textDecoration: "none",
@@ -144,10 +144,10 @@ export default function Sidebar() {
               fontSize: "16px",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "rgb(60, 60, 180)";
+              e.currentTarget.style.backgroundColor = "rgb(0, 100, 220)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "rgb(77, 77, 209)";
+              e.currentTarget.style.backgroundColor = "rgba(0, 119, 255, 1)";
             }}
           >
             Post
