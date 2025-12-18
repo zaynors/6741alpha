@@ -1,4 +1,5 @@
 import { Heart, MessageCircle, Repeat2, Share } from 'lucide-react';
+import { useMobile } from '@/hooks/use-mobile';
 
 interface PostCardProps {
   author: string;
@@ -21,14 +22,18 @@ export default function PostCard({
   image,
   likes = 0
 }: PostCardProps) {
+  const isMobile = useMobile();
+
+  const padding = isMobile ? '16px' : '32px';
+
   return (
     <div
       style={{
         borderBottom: '0.909091px solid rgba(0, 0, 0, 0.1)',
-        paddingBottom: '32px',
-        paddingLeft: '32px',
-        paddingRight: '32px',
-        paddingTop: '32px',
+        paddingBottom: padding,
+        paddingLeft: padding,
+        paddingRight: padding,
+        paddingTop: padding,
         position: 'relative'
       }}
     >
