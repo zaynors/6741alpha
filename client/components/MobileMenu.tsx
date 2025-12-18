@@ -153,7 +153,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     fontWeight: item.id === "home" ? "700" : "normal",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
+                    e.currentTarget.style.backgroundColor =
+                      "rgba(0, 0, 0, 0.1)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor = "transparent";
