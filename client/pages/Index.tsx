@@ -83,8 +83,20 @@ export default function Index() {
             flexWrap: 'wrap'
           }}
         >
-          {/* Left Sidebar */}
-          <div>
+          {/* Left Sidebar - Fixed Width */}
+          <div
+            style={{
+              width: '275px',
+              maxWidth: '100%',
+              paddingBottom: '8px',
+              paddingTop: '8px',
+              position: 'sticky',
+              top: '0',
+              height: '100%',
+              alignItems: 'center',
+              justifyContent: 'flex-end'
+            }}
+          >
             <Header />
             <Sidebar />
           </div>
@@ -102,29 +114,18 @@ export default function Index() {
               borderStyle: 'none solid'
             }}
           >
-            <div
-              style={{
-                borderBottom: '0.909091px solid rgba(0, 0, 0, 0.1)',
-                paddingBottom: '32px',
-                paddingLeft: '32px',
-                paddingRight: '32px',
-                paddingTop: '32px',
-                position: 'relative'
-              }}
-            >
-              {samplePosts.map((post, idx) => (
-                <PostCard
-                  key={idx}
-                  author={post.author}
-                  handle={post.handle}
-                  timestamp={post.timestamp}
-                  title={post.title}
-                  content={post.content}
-                  quote={post.quote}
-                  likes={post.likes}
-                />
-              ))}
-            </div>
+            {samplePosts.map((post, idx) => (
+              <PostCard
+                key={idx}
+                author={post.author}
+                handle={post.handle}
+                timestamp={post.timestamp}
+                title={post.title}
+                content={post.content}
+                quote={post.quote}
+                likes={post.likes}
+              />
+            ))}
           </div>
 
           {/* Right Sidebar */}
