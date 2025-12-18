@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import PostCard from '@/components/PostCard';
 import SearchPanel from '@/components/SearchPanel';
 import TrendsPanel from '@/components/TrendsPanel';
 import WhoToFollowPanel from '@/components/WhoToFollowPanel';
+import { useMobile } from '@/hooks/use-mobile';
 
 const samplePosts = [
   {
@@ -57,6 +59,131 @@ const samplePosts = [
 ];
 
 export default function Index() {
+  const isMobile = useMobile();
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  if (!isHydrated) {
+    return null;
+  }
+
+  if (isMobile) {
+    return (
+      <section
+        aria-label="main"
+        style={{
+          position: 'relative',
+          backgroundColor: 'rgb(255, 255, 255)',
+          minHeight: '100vh',
+          width: '100%'
+        }}
+      >
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column'
+          }}
+        >
+          {/* Mobile Header */}
+          <div
+            style={{
+              position: 'sticky',
+              top: '0',
+              zIndex: 10,
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              paddingLeft: '12px',
+              paddingRight: '12px',
+              paddingTop: '8px',
+              paddingBottom: '8px'
+            }}
+          >
+            <div
+              style={{
+                paddingLeft: '12px',
+                paddingRight: '12px',
+                paddingTop: '12px',
+                paddingBottom: '8px'
+              }}
+            >
+              <SearchPanel />
+            </div>
+          </div>
+
+          {/* Mobile Feed */}
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+          >
+            {samplePosts.map((post, idx) => (
+              <PostCard
+                key={idx}
+                author={post.author}
+                handle={post.handle}
+                timestamp={post.timestamp}
+                title={post.title}
+                content={post.content}
+                quote={post.quote}
+                likes={post.likes}
+              />
+            ))}
+          </div>
+
+          {/* Mobile Footer Banner */}
+          <div
+            style={{
+              paddingLeft: '12px',
+              paddingRight: '12px',
+              paddingTop: '24px',
+              paddingBottom: '24px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0',
+              backgroundColor: 'rgba(255, 255, 255, 0.9)'
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                gap: '0',
+                alignItems: 'flex-start'
+              }}
+            >
+              <div
+                style={{
+                  aspectRatio: '2 / 1',
+                  overflow: 'hidden',
+                  width: '90px',
+                  flexShrink: 0
+                }}
+              >
+                <img
+                  width="360"
+                  height="180"
+                  alt=""
+                  loading="lazy"
+                  src="https://framerusercontent.com/images/L88JUEHNoHEubjt66ulsdhMy5g.png?width=360&height=180"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       aria-label="main"
