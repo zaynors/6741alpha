@@ -1,7 +1,11 @@
 import { Moon, Sun } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-export default function Header() {
+interface HeaderProps {
+  onMenuToggle?: () => void;
+}
+
+export default function Header({ onMenuToggle }: HeaderProps = {}) {
   const isMobile = useIsMobile();
 
   return (
@@ -58,6 +62,7 @@ export default function Header() {
       <button
         type="button"
         aria-label="Toggle navigation"
+        onClick={onMenuToggle}
         style={{
           display: isMobile ? "flex" : "none",
           float: "right",

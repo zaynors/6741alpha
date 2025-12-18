@@ -5,6 +5,7 @@ import PostCard from "@/components/PostCard";
 import SearchPanel from "@/components/SearchPanel";
 import TrendsPanel from "@/components/TrendsPanel";
 import WhoToFollowPanel from "@/components/WhoToFollowPanel";
+import MobileMenu from "@/components/MobileMenu";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const samplePosts = [
@@ -69,6 +70,7 @@ const samplePosts = [
 export default function Index() {
   const isMobile = useIsMobile();
   const [isHydrated, setIsHydrated] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setIsHydrated(true);
@@ -89,6 +91,11 @@ export default function Index() {
           width: "100%",
         }}
       >
+        <MobileMenu
+          isOpen={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
+        />
+
         <div
           style={{
             width: "100%",
@@ -109,6 +116,7 @@ export default function Index() {
               paddingBottom: "8px",
             }}
           >
+            <Header onMenuToggle={() => setIsMobileMenuOpen(true)} />
             <div
               style={{
                 paddingLeft: "12px",
