@@ -1,6 +1,9 @@
 import { Moon, Sun } from 'lucide-react';
+import { useMobile } from '@/hooks/use-mobile';
 
 export default function Header() {
+  const isMobile = useMobile();
+
   return (
     <div
       style={{
@@ -11,50 +14,52 @@ export default function Header() {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: isMobile ? 'space-between' : 'flex-start'
       }}
     >
-      <a
-        href="/"
-        style={{
-          display: 'inline',
-          fontSize: '20px',
-          lineHeight: '30px',
-          marginRight: '16px',
-          paddingBottom: '5px',
-          paddingTop: '5px',
-          textDecoration: 'none',
-          color: 'rgb(15, 20, 25)'
-        }}
-      >
-        <span
+      {!isMobile && (
+        <a
+          href="/"
           style={{
-            position: 'absolute',
-            width: '1px',
-            height: '1px',
-            overflow: 'hidden',
-            clip: 'rect(0, 0, 0, 0)'
+            display: 'inline',
+            fontSize: '20px',
+            lineHeight: '30px',
+            marginRight: '16px',
+            paddingBottom: '5px',
+            paddingTop: '5px',
+            textDecoration: 'none',
+            color: 'rgb(15, 20, 25)'
           }}
         >
-          Logo
-        </span>
-        <img
-          alt="Site logo"
-          loading="lazy"
-          src="https://67.vvveb.com/media/logo.png"
-          style={{
-            maxHeight: '80px',
-            verticalAlign: 'middle',
-            display: 'inline'
-          }}
-        />
-      </a>
+          <span
+            style={{
+              position: 'absolute',
+              width: '1px',
+              height: '1px',
+              overflow: 'hidden',
+              clip: 'rect(0, 0, 0, 0)'
+            }}
+          >
+            Logo
+          </span>
+          <img
+            alt="Site logo"
+            loading="lazy"
+            src="https://67.vvveb.com/media/logo.png"
+            style={{
+              maxHeight: '80px',
+              verticalAlign: 'middle',
+              display: 'inline'
+            }}
+          />
+        </a>
+      )}
 
       <button
         type="button"
         aria-label="Toggle navigation"
         style={{
-          display: 'none',
+          display: isMobile ? 'flex' : 'none',
           float: 'right',
           padding: '4px 12px',
           fontSize: '20px',
@@ -63,7 +68,9 @@ export default function Header() {
           borderRadius: '6px',
           backgroundColor: 'transparent',
           cursor: 'pointer',
-          color: 'rgba(15, 20, 25, 0.65)'
+          color: 'rgba(15, 20, 25, 0.65)',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         <span style={{ display: 'inline-block', width: '30px', height: '30px' }}>☰</span>
