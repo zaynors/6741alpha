@@ -5,7 +5,7 @@ import PostCard from '@/components/PostCard';
 import SearchPanel from '@/components/SearchPanel';
 import TrendsPanel from '@/components/TrendsPanel';
 import WhoToFollowPanel from '@/components/WhoToFollowPanel';
-import { useMobile } from '@/hooks/use-mobile';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const samplePosts = [
   {
