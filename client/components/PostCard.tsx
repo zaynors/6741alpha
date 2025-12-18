@@ -22,7 +22,7 @@ export default function PostCard({
   image,
   likes = 0
 }: PostCardProps) {
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
 
   const padding = isMobile ? '16px' : '32px';
 
