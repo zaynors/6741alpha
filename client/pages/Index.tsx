@@ -59,7 +59,7 @@ const samplePosts = [
 ];
 
 export default function Index() {
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
