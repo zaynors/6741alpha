@@ -1,5 +1,5 @@
 import { Heart, MessageCircle, Repeat2, Share } from 'lucide-react';
-import { useMobile } from '@/hooks/use-mobile';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface PostCardProps {
   author: string;
