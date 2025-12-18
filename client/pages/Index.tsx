@@ -1,62 +1,158 @@
-import { DemoResponse } from "@shared/api";
-import { useEffect, useState } from "react";
+import Header from '@/components/Header';
+import Sidebar from '@/components/Sidebar';
+import PostCard from '@/components/PostCard';
+import SearchPanel from '@/components/SearchPanel';
+import TrendsPanel from '@/components/TrendsPanel';
+import WhoToFollowPanel from '@/components/WhoToFollowPanel';
+
+const samplePosts = [
+  {
+    author: 'Admin',
+    handle: 'admin',
+    timestamp: '3 years ago',
+    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+    content: 'Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin. Praesent at tempus lectus, eleifend blandit felis. Fusce augue arcu, consequat a nisl aliquet, consectetur elementum turpis. Donec iaculis lobortis nisl, et viverra risus imperdiet eu. Etiam mollis posuere elit non sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis arcu a magna sodales venenatis. Integer non diam sit amet magna luctus mollis ac eu nisi. In accumsan tellus ut dapibus blandit.',
+    quote: 'Quisque sagittis non ex eget vestibulum. Sed nec ultrices dui. Cras et sagittis erat. Maecenas pulvinar, turpis in dictum tincidunt, dolor nibh lacinia lacus.',
+    likes: 0
+  },
+  {
+    author: 'Admin',
+    handle: 'admin',
+    timestamp: '3 years ago',
+    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+    content: 'Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.',
+    quote: 'Quisque sagittis non ex eget vestibulum. Sed nec ultrices dui.',
+    likes: 0
+  },
+  {
+    author: 'Admin',
+    handle: 'admin',
+    timestamp: '3 years ago',
+    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+    content: 'Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.',
+    likes: 0
+  },
+  {
+    author: 'Admin',
+    handle: 'admin',
+    timestamp: '3 years ago',
+    content: 'All in the world know the beauty of the beautiful, and in doing this they have (the idea of) what ugliness is; they all know the skill of the skilful, and in doing this they have (the idea of) what the want of skill is. So it is that existence and nonexistence give birth the one to (the idea of) the other; that difficulty and ease produce the one (the idea of) the other.',
+    quote: 'The work is done, but how no one can see; This that makes the power not cease to be.',
+    likes: 0
+  },
+  {
+    author: 'Admin',
+    handle: 'admin',
+    timestamp: '3 years ago',
+    content: 'Not finding an explanation in science I began to seek for it in life, hoping to find it among the people around me. And I began to observe how the people around me lived, and what their attitude was to this question which had brought me to despair.',
+    likes: 0
+  },
+  {
+    author: 'Admin',
+    handle: 'admin',
+    timestamp: '3 years ago',
+    content: 'Begin each day by telling yourself: Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders\' ignorance of what is good or evil.',
+    likes: 1
+  }
+];
 
 export default function Index() {
-  const [exampleFromServer, setExampleFromServer] = useState("");
-  // Fetch users on component mount
-  useEffect(() => {
-    fetchDemo();
-  }, []);
-
-  // Example of how to fetch data from the server (if needed)
-  const fetchDemo = async () => {
-    try {
-      const response = await fetch("/api/demo");
-      const data = (await response.json()) as DemoResponse;
-      setExampleFromServer(data.message);
-    } catch (error) {
-      console.error("Error fetching hello:", error);
-    }
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-      <div className="text-center">
-        {/* TODO: FUSION_GENERATION_APP_PLACEHOLDER replace everything here with the actual app! */}
-        <h1 className="text-2xl font-semibold text-slate-800 flex items-center justify-center gap-3">
-          <svg
-            className="animate-spin h-8 w-8 text-slate-400"
-            viewBox="0 0 50 50"
+    <section
+      aria-label="main"
+      style={{
+        position: 'relative',
+        backgroundColor: 'rgb(255, 255, 255)',
+        minHeight: '100vh'
+      }}
+    >
+      <div
+        style={{
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          maxWidth: '1320px',
+          paddingLeft: '12px',
+          paddingRight: '12px',
+          width: '100%'
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexFlow: 'row wrap',
+            flexWrap: 'wrap'
+          }}
+        >
+          {/* Left Sidebar */}
+          <div>
+            <Header />
+            <Sidebar />
+          </div>
+
+          {/* Main Feed */}
+          <div
+            style={{
+              borderLeft: '0.909091px solid rgba(0, 0, 0, 0.1)',
+              borderRight: '0.909091px solid rgba(0, 0, 0, 0.1)',
+              flexBasis: '0',
+              flexGrow: 1,
+              height: '100%',
+              maxWidth: '100%',
+              width: '100%',
+              borderStyle: 'none solid'
+            }}
           >
-            <circle
-              className="opacity-30"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-            />
-            <circle
-              className="text-slate-600"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-              strokeDasharray="100"
-              strokeDashoffset="75"
-            />
-          </svg>
-          Generating your app...
-        </h1>
-        <p className="mt-4 text-slate-600 max-w-md">
-          Watch the chat on the left for updates that might need your attention
-          to finish generating
-        </p>
-        <p className="mt-4 hidden max-w-md">{exampleFromServer}</p>
+            <div
+              style={{
+                borderBottom: '0.909091px solid rgba(0, 0, 0, 0.1)',
+                paddingBottom: '32px',
+                paddingLeft: '32px',
+                paddingRight: '32px',
+                paddingTop: '32px',
+                position: 'relative'
+              }}
+            >
+              {samplePosts.map((post, idx) => (
+                <PostCard
+                  key={idx}
+                  author={post.author}
+                  handle={post.handle}
+                  timestamp={post.timestamp}
+                  title={post.title}
+                  content={post.content}
+                  quote={post.quote}
+                  likes={post.likes}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Right Sidebar */}
+          <div
+            style={{
+              height: '100%',
+              maxWidth: '100%',
+              paddingLeft: '16px',
+              position: 'sticky',
+              top: '0',
+              width: '400px'
+            }}
+          >
+            <div
+              style={{
+                paddingBottom: '16px',
+                paddingLeft: '16px',
+                paddingRight: '16px',
+                paddingTop: '16px'
+              }}
+            >
+              <SearchPanel />
+              <TrendsPanel />
+              <WhoToFollowPanel />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
