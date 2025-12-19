@@ -1,8 +1,10 @@
-import { Moon, Sun } from "lucide-react";
+import { Sun, LogOut } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Header() {
   const isMobile = useIsMobile();
+  const { signOut } = useAuth();
 
   return (
     <div
@@ -92,9 +94,28 @@ export default function Header() {
           display: "flex",
           alignItems: "center",
           gap: "4px",
+          marginRight: "8px",
         }}
       >
         <Sun size={20} />
+      </button>
+
+      <button
+        onClick={signOut}
+        title="Sign out"
+        style={{
+          float: "right",
+          padding: "8px",
+          backgroundColor: "transparent",
+          border: "none",
+          cursor: "pointer",
+          color: "rgb(108, 117, 125)",
+          display: "flex",
+          alignItems: "center",
+          gap: "4px",
+        }}
+      >
+        <LogOut size={20} />
       </button>
     </div>
   );
